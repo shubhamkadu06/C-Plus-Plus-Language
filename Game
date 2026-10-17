@@ -1,0 +1,97 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <cctype>
+
+using namespace std;
+
+// Function declarations
+char getUserChoice();
+char getComputerChoice();
+void showChoice(char choice);
+void chooseWinner(char player, char computer);
+
+int main() {
+    char player;
+    char computer;
+    char playAgain;
+
+    // Seed the random number generator using the current system time
+    srand(static_cast<unsigned int>(time(0)));
+
+    cout << "=========================================\n";
+    cout << "   Welcome to Rock, Paper, Scissors!    \n";
+    cout << "=========================================\n";
+
+    do {
+        player = getUserChoice();
+        cout << "You chose: ";
+        showChoice(player);
+
+        computer = getComputerChoice();
+        cout << "Computer chose: ";
+        showChoice(computer);
+
+        chooseWinner(player, computer);
+
+        cout << "\nDo you want to play another round? (Y/N): ";
+        cin >> playAgain;
+        playAgain = toupper(playAgain); 
+        cout << "\n";
+
+    } while(playAgain == 'Y');
+
+    cout << "Thanks for playing! Goodbye!\n";
+    return 0;
+}
+
+// Prompts the user and guarantees a valid input ('R', 'P', or 'S')
+char getUserChoice() {
+    char choice;
+    do {
+        cout << "Enter 'R' for Rock, 'P' for Paper, or 'S' for Scissors: ";
+        cin >> choice;
+        choice = toupper(choice); // Handles lowercase entries gracefully
+    } while (choice != 'R' && choice != 'P' && choice != 'S');
+    
+    return choice;
+}
+
+// Randomly generates the computer's choice
+char getComputerChoice() {
+    // Generates a random number: 0, 1, or 2
+    int num = rand() % 3; 
+    
+    switch(num) {
+        case 0: return 'R';
+        case 1: return 'P';
+        case 2: return 'S';
+        default: return 'R';
+    }
+}
+
+// Helper function to print out full words instead of letters
+void showChoice(char choice) {
+    switch(choice) {
+        case 'R': cout << "Rock\n"; break;
+        case 'P': cout << "Paper\n"; break;
+        case 'S': cout << "Scissors\n"; break;
+    }
+}
+
+// Evaluates choices and declares the outcome based on game logic
+void chooseWinner(char player, char computer) {
+    if (player == computer) {
+        cout << "It's a tie!\n";
+        return;
+    }
+
+    // Checking all player winning conditions
+    if ((player == 'R' && computer == 'S') ||
+        (player == 'P' && computer == 'R') ||
+        (player == 'S' && computer == 'P')) {
+        cout << "Congratulations, you win!\n";
+    } else {
+        cout << "You lose! Better luck next time.\n";
+    }
+}
