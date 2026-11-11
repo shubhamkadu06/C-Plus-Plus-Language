@@ -1,0 +1,12 @@
+To write and run C++ code, you need a C++ compiler (which turns your code into an executable program) and a code editor or IDE. Because installation steps vary by operating system, choose the guide below for your device.
+
+Windows
+
+You have two main options on Windows depending on whether you want a full-featured development suite or a lightweight editor.
+• Option 1: All-in-One Setup (Visual Studio Community). Download and run the installer from the Visual Studio Downloads page. During setup, check the Desktop development with C++ workload and click Install. This automatically configures both the editor and the Microsoft MSVC compiler.
+• Option 2: Lightweight Setup (VS Code + MinGW-w64).
+	1. Install Visual Studio Code and add the C/C++ extension from the Extensions view (Ctrl+Shift+X).
+	2. Download and install MSYS2 to get the GCC compiler.
+	3. Open the MSYS2 terminal and run pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain.
+	4. Add the compiler's bin folder (typically C:\msys64\ucrt64\bin) to your Windows System Path environment variable.
+• Verification. Open Command Prompt or PowerShell and run g++ --version (for MinGW) to confirm the compiler is recognized
